@@ -351,7 +351,7 @@ public class StackDrawerLayout extends FrameLayout {
 
             closeToMiddleHalf = a_view.getMeasuredHeight() / 2;
             middleToOpenHalf = (getMeasuredHeight() - a_view.getMeasuredHeight()) / 2
-                    + a_view.getMeasuredHeight();
+                                     + a_view_1.getMeasuredHeight();
 
             switch (status){
                 case Close:
