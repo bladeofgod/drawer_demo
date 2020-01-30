@@ -211,6 +211,7 @@ public class StackDrawerLayout extends FrameLayout {
             super.onViewReleased(releasedChild, xvel, yvel);
             if(releasedChild == drawerView){
                 int height = releasedChild.getHeight();
+                Log.i("drawer", "release view height  " + height);
                 if(mPreStatus == DrawerStatus.Close &&  yvel < -Y_VELOCITY){
                     //drawer 关闭时，如果向上滑动速度大于 设置的临界值
                     //打开
@@ -235,6 +236,8 @@ public class StackDrawerLayout extends FrameLayout {
                     //滑动到  中间 -  打开 的位置
                     if(height > middleToOpenHalf){
                         //
+                        Log.i("height info","height " + height +
+                                "middle height" + middleHeight+ "middle per" + middleTopPercent );
                         open();
                     }else{
                         middle();
