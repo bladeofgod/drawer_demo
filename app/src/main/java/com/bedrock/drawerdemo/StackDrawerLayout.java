@@ -96,14 +96,20 @@ public class StackDrawerLayout extends FrameLayout {
 
     public StackDrawerLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        initVar(context);
     }
+
+    public StackDrawerLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+    }
+
     //滑动速度跟踪器
     private VelocityTracker velocityTracker;
     private int maxVelocity;
 
 
-    public StackDrawerLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    private void initVar(Context context){
         this.mContext = context;
 
         init(context);
@@ -121,8 +127,8 @@ public class StackDrawerLayout extends FrameLayout {
         //参数1：MotionEvent ev 主要是ViewGroup的事件
         //processTouchEvent(MotionEvent event) 处理相应TouchEvent的方法，这里要注意一个问题，处理相应的TouchEvent的时候要将结果返回为true，消费本次事件！否则将无法使用ViewDragHelper处理相应的拖拽事件！
         this.dragHelper = ViewDragHelper.create(this,mCallback);
-
     }
+
 
     ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
         //tryCaptureView(View child, int pointerId) 这是一个抽象类，必须去实现
@@ -440,6 +446,7 @@ public class StackDrawerLayout extends FrameLayout {
     public void computeScroll() {
         super.computeScroll();
         // 2. 持续平滑动画 (高频率调用)
+        if(dragHelper == null) return;
         if (dragHelper.continueSettling(true)) {
             //  如果返回true, 动画还需要继续执行
             ViewCompat.postInvalidateOnAnimation(this);
