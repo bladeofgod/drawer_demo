@@ -325,6 +325,7 @@ public class StackDrawerLayout extends FrameLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.i("view", "onConfigurationChanged");
         mConfigurationChangedFlag = true;
     }
 
@@ -355,9 +356,9 @@ public class StackDrawerLayout extends FrameLayout {
             //触发 滚动顶部的临界值
             middleHeight = (a_view_1.getMeasuredHeight()) * 3;
 
-            closeToMiddleHalf = a_view.getMeasuredHeight() / 2;
-            middleToOpenHalf = (getMeasuredHeight() - a_view.getMeasuredHeight()) / 2
-                                     + a_view_1.getMeasuredHeight();
+            closeToMiddleHalf = a_view.getMeasuredHeight() ;
+            middleToOpenHalf = (getMeasuredHeight() - middleHeight) / 2
+                                     + middleHeight;
 
             switch (status){
                 case Close:
@@ -417,6 +418,7 @@ public class StackDrawerLayout extends FrameLayout {
 
     private void changeDrawerViewHeight(int height){
         LayoutParams lp = (LayoutParams)drawerView.getLayoutParams();
+        Log.i("view", "view  height : " + height);
         lp.height = height;
         drawerView.setLayoutParams(lp);
     }
