@@ -174,8 +174,27 @@ public class StackDrawerLayout extends FrameLayout {
             super.onViewPositionChanged(changedView, left, top, dx, dy);
             if (changedView == drawerView) {
                 //这里将top转为 drawer的高度
-                int height = screenHeight - top;
-                changeDrawerViewHeight(height);
+                Log.i("view", "view  top : " + top);
+                Log.i("view", "view  dy : " + dy);
+                Log.i("view", "view  dx : " + dx);
+                int height = 0;
+                if(slideOffset > 0){
+                    //向下滑
+                    height = (int)(drawerView.getMeasuredHeight() - Math.abs(slideOffset));
+                }else{
+                    //向上滑
+                    height = screenHeight - top ;
+                }
+
+//                if(top >= 0 ){
+//                    //向上滑动
+//                    height = screenHeight - top;
+//                }else{
+//                    //向下滑动
+//                    height = drawerView.getMeasuredHeight() - Math.abs(dy);
+//                }
+
+                changeDrawerViewHeight(height >= screenHeight ? screenHeight : height);
                 dispatchDragViewEvent(top);
             }
             invalidate();
@@ -472,6 +491,7 @@ public class StackDrawerLayout extends FrameLayout {
         });
     }
 
+
     private float xDistance, yDistance, xLast, yLast;
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -489,6 +509,10 @@ public class StackDrawerLayout extends FrameLayout {
             case MotionEvent.ACTION_MOVE:
                 final float curX = ev.getX();
                 final float curY = ev.getY();
+                //slideUp = curY < yLast;
+                Log.i("drawer", "curY  " + curY + "___ yLast  " + yLast);
+                slideOffset = Math.abs(curY) - Math.abs(yLast);
+                Log.i("drawer", "slide offset  " + slideOffset);
 
                 xDistance += Math.abs(curX - xLast);
                 yDistance += Math.abs(curY - yLast);
@@ -509,9 +533,35 @@ public class StackDrawerLayout extends FrameLayout {
         return dragHelper.shouldInterceptTouchEvent(ev);
     }
 
+    private boolean slideUp = false;
+    private float slideOffset = 0;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                xDistance = yDistance = 0f;
+                xLast = event.getX();
+                yLast = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                final float curX = event.getX();
+                final float curY = event.getY();
+                //slideUp = curY < yLast;
+                Log.i("drawer", "curY  " + curY + "___ yLast  " + yLast);
+                slideOffset = Math.abs(curY) - Math.abs(yLast);
+                Log.i("drawer", "slide offset  " + slideOffset);
+
+                xDistance += Math.abs(curX - xLast);
+                yDistance += Math.abs(curY - yLast);
+                xLast = curX;
+                yLast = curY;
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+            default:break;
+        }
         dragHelper.processTouchEvent(event);
         //返回true 表示 自己消费，具体如何消费由上面的方法处理
         return true;
