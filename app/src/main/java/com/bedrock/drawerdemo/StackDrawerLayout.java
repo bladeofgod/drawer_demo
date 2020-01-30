@@ -145,7 +145,7 @@ public class StackDrawerLayout extends FrameLayout {
         @Override
         public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
             if(child == drawerView){
-                return reAdjustTop(top);
+                //return reAdjustTop(top);
             }
             return top;
         }
@@ -306,7 +306,7 @@ public class StackDrawerLayout extends FrameLayout {
 
     private int reAdjustTop(int top){
         int openTop = screenHeight - openHeight;
-        int middleTop = screenHeight = middleHeight;
+        int middleTop = screenHeight - middleHeight;
         int closeTop = screenHeight - closeHeight;
         if(top <= openHeight && top > middleTop){
             return openTop;
@@ -353,7 +353,7 @@ public class StackDrawerLayout extends FrameLayout {
             //全打开
             openHeight = getMeasuredHeight();
             //触发 滚动顶部的临界值
-            middleHeight = a_view.getMeasuredHeight();
+            middleHeight = (a_view_1.getMeasuredHeight()) * 3;
 
             closeToMiddleHalf = a_view.getMeasuredHeight() / 2;
             middleToOpenHalf = (getMeasuredHeight() - a_view.getMeasuredHeight()) / 2
