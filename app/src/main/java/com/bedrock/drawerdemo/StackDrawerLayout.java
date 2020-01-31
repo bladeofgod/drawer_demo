@@ -378,7 +378,7 @@ public class StackDrawerLayout extends FrameLayout {
             //触发 滚动顶部的临界值
             middleHeight = (a_view_1.getMeasuredHeight()) * 3;
 
-            closeToMiddleHalf = a_view.getMeasuredHeight() ;
+            closeToMiddleHalf = (int)(a_view.getMeasuredHeight() * 1.5 );
             middleToOpenHalf = (getMeasuredHeight() - middleHeight) / 2
                                      + middleHeight;
 

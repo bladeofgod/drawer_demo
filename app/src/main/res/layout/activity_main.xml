@@ -31,7 +31,7 @@
         android:id="@+id/drawer_view"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="100dp">
         <LinearLayout
             android:id="@+id/view_a"
             android:orientation="vertical"
@@ -42,24 +42,24 @@
                 android:gravity="center"
                 android:text="view_a_1"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
             <TextView
                 android:id="@+id/tv_a_2"
                 android:gravity="center"
                 android:text="view_a_1"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
             <TextView
                 android:id="@+id/tv_a_3"
                 android:gravity="center"
                 android:text="view_a_1"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
 
         </LinearLayout>
         <LinearLayout
             android:background="@color/color_green_light"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="200dp"
             android:id="@+id/view_b"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -70,14 +70,14 @@
                 android:textColor="@color/color_red"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="100dp"/>
             <TextView
                 android:id="@+id/tv_b_2"
                 android:text="tv_b_2"
                 android:textColor="@color/color_red"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="500dp"/>
 
         </LinearLayout>
 
